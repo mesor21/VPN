@@ -7,16 +7,20 @@ id=$6
 vpnIp=$7
 server_publickey=$8
 
-wg genkey | tee "$PWD/$ip/client_privatekey" | wg pubkey | tee "$PWD/$ip/client_publickey"
-wg genpsk | tee "$PWD/$ip/client_preshared"
+configsFolder=$(cat ./configsFolder)
 
-mkdir $PWD/$ip/keys
-client_privatekey=$(cat "$PWD/$ip/keys/client_privatekey")
-client_publickey=$(cat "$PWD/$ip/keys/client_publickey")
-client_preshared=$(cat "$PWD/$ip/keys/client_preshared")
-rm -r $PWD/$ip/keys
+mkdir $configsFolder/$ip/keys
 
-touch "PWD/$ip/userConfig/$id.conf"
+wg genkey | tee "$configsFolder/$ip/client_privatekey" | wg pubkey | tee "$configsFolder/$ip/client_publickey"
+wg genpsk | tee "$configsFolder/$ip/client_preshared"
+
+
+client_privatekey=$(cat "$configsFolder/$ip/keys/client_privatekey")
+client_publickey=$(cat "$configsFolder/$ip/keys/client_publickey")
+client_preshared=$(cat "$configsFolder/$ip/keys/client_preshared")
+rm -r $configsFolder/$ip/keys
+
+touch "$configsFolder/$ip/userConfig/$id.conf"
 echo "[Interface]
 Address = $ip
 PrivateKey = $client_privatekey
@@ -28,6 +32,6 @@ PresharedKey = $client_preshared
 PersistentKeepalive = 25
 Endpoint = $server_ip:$portWG
 AllowedIPs = 0.0.0.0/0, ::/0
-" > "$current_dir/$x/client_config/wg$y.conf"
+" > "$configsFolder/$ip/userConfig/$id.conf"
 
 sshpass -p "$password" ssh $username@$ip -p $portSSH "bash ./createUser.sh $client_publickey $client_preshared $ip"
