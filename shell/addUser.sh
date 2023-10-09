@@ -16,7 +16,7 @@ client_publickey=$(cat "$PWD/$ip/keys/client_publickey")
 client_preshared=$(cat "$PWD/$ip/keys/client_preshared")
 rm -r $PWD/$ip/keys
 
-touch "$PWD/$ip/$id.conf"
+touch "PWD/$ip/userConfig/$id.conf"
 echo "[Interface]
 Address = $ip
 PrivateKey = $client_privatekey
@@ -30,7 +30,4 @@ Endpoint = $server_ip:$portWG
 AllowedIPs = 0.0.0.0/0, ::/0
 " > "$current_dir/$x/client_config/wg$y.conf"
 
-ssh -p $portSSH $username@$ip
-sleep 5
-$password
-
+sshpass -p "$password" ssh $username@$ip -p $portSSH "bash ./createUser.sh $client_publickey $client_preshared $ip"
