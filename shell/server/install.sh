@@ -14,10 +14,12 @@ sudo ufw allow in on wg0 to any
 sudo systemctl start ufw
 sudo systemctl enable ufw
 sudo journalctl --vacuum-time=1d
-sudo useradd $username -p $(openssl passwd -1 $password)
-sudo usermod -d /vpn/shell -s /vpn/shell $username
+sudo useradd -d /vpn/shell $username
+echo "$password
+$password" | sudo passwd
+sudo chown -R $username:$username /vpn/shell
+sudo chmod 700 /vpn/shell
 sudo systemctl restart ssh.service
 bash $PWD/createConfig.sh $serverIp $portWG
-mv ./wg0.conf /etc/wireguard/
 sudo systemctl start wg-quick@wg0
 sudo systemctl enable wg-quick@wg0
