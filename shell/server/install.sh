@@ -7,7 +7,6 @@ portWG=$5
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt install wireguard-tools -y
-sudo apt install ufw -y
 sudo apt install sysstat -y
 sudo ufw allow $portSSH
 sudo ufw allow $portWG
@@ -22,7 +21,7 @@ sudo chown -R $username:$username /vpn/shell
 sudo chown -R $username:$username /etc/wireguard/
 sudo chmod 777 /vpn/shell
 sudo systemctl restart ssh.service
-bash $PWD/createConfig.sh $serverIp $portWG
+bash /vpn/shell/createConfig.sh $serverIp $portWG
 sudo wg-quick up wg0
 sudo systemctl start wg-quick@wg0
 sudo systemctl enable wg-quick@wg0

@@ -16,9 +16,9 @@ Address = $serverIp
 SaveConfig = true
 PostUp = iptables -t nat -I POSTROUTING -o $server_interface -j MASQUERADE
 PostUp = ip6tables -t nat -I POSTROUTING -o $server_interface -j MASQUERADE
-PostUp = ufw allow $portWG
+PostUp = ufw allow $portWG/udp
 PreDown = iptables -t nat -D POSTROUTING -o $server_interface -j MASQUERADE
 PreDown = ip6tables -t nat -D POSTROUTING -o $server_interface -j MASQUERADE
-PreDown = ufw delete allow $portWG
+PreDown = ufw delete allow $portWG/udp
 ListenPort = $portWG
 ">>/etc/wireguard/wg0.conf
