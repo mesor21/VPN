@@ -8,6 +8,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt install wireguard-tools -y
 sudo apt install ufw -y
+sudo apt install sysstat -y
 sudo ufw allow $portSSH
 sudo ufw allow $portWG
 sudo ufw allow in on wg0 to any
@@ -16,7 +17,7 @@ sudo systemctl enable ufw
 sudo journalctl --vacuum-time=1d
 sudo useradd -d /vpn/shell $username
 echo "$password
-$password" | sudo passwd
+$password" | sudo passwd $username
 sudo chown -R $username:$username /vpn/shell
 sudo chmod 700 /vpn/shell
 sudo systemctl restart ssh.service

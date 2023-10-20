@@ -21,6 +21,9 @@ mkdir $configsFolder/$serverIp/vpn/shell
 cp $shellFolder/server/* $configsFolder/$serverIp/vpn/shell
 
 sshpass -p "$password" scp -o StrictHostKeyChecking=no -P $portSSH -r $configsFolder/$serverIp/vpn/ $username@$serverIp:/tmp/
-sshpass -p "$password" ssh -o StrictHostKeyChecking=no $username@$serverIp -p $portSSH "echo '$suPassword' | $suCommand -S mkdir /vpn ; sudo cp -r /tmp/vpn/* /vpn ; sudo bash /vpn/shell/install.sh $serverUsername $serverPassword $serverIp $portSSH $portWG"
-
+sshpass -p "$password" ssh -o StrictHostKeyChecking=no $username@$serverIp -p $portSSH 'bash -s' << EOF
+echo '$suPassword' | $suCommand -S mkdir /vpn
+$suCommand cp -r /tmp/vpn/* /vpn
+$suCommand bash /vpn/shell/install.sh $serverUsername $serverPassword $serverIp $portSSH $portWG"
+EOF
 # rm -r  $configsFolder/$serverIp/vpn
