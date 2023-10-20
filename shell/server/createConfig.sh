@@ -9,16 +9,16 @@ rm -r keys
 
 server_interface=$(ip route | grep default | awk '{print $5}')
 
-touch wg0.conf
-echo "[Interface]
+sudo touch /etc/wireguard/wg0.conf
+sudo echo "[Interface]
 PrivateKey = $server_privatekey
 Address = $serverIp
 SaveConfig = true
 PostUp = iptables -t nat -I POSTROUTING -o $server_interface -j MASQUERADE
 PostUp = ip6tables -t nat -I POSTROUTING -o $server_interface -j MASQUERADE
-PostUp = ufw alllow $portWG
+PostUp = ufw allow $portWG
 PreDown = iptables -t nat -D POSTROUTING -o $server_interface -j MASQUERADE
 PreDown = ip6tables -t nat -D POSTROUTING -o $server_interface -j MASQUERADE
 PreDown = ufw delete allow $portWG
 ListenPort = $portWG
-">>wg0.conf
+">>/etc/wireguard/wg0.conf

@@ -19,8 +19,10 @@ sudo useradd -d /vpn/shell $username
 echo "$password
 $password" | sudo passwd $username
 sudo chown -R $username:$username /vpn/shell
-sudo chmod 700 /vpn/shell
+sudo chown -R $username:$username /etc/wireguard/
+sudo chmod 777 /vpn/shell
 sudo systemctl restart ssh.service
 bash $PWD/createConfig.sh $serverIp $portWG
+sudo wg-quick up wg0
 sudo systemctl start wg-quick@wg0
 sudo systemctl enable wg-quick@wg0
