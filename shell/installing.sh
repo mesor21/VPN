@@ -24,6 +24,6 @@ sshpass -p "$password" scp -o StrictHostKeyChecking=no -P $portSSH -r $configsFo
 sshpass -p "$password" ssh -o StrictHostKeyChecking=no $username@$serverIp -p $portSSH 'bash -s' << EOF
 echo '$suPassword' | $suCommand -S mkdir /vpn
 $suCommand cp -r /tmp/vpn/* /vpn
-$suCommand bash /vpn/shell/install.sh $serverUsername $serverPassword $serverIp $portSSH $portWG"
+$suCommand bash /vpn/shell/install.sh $serverUsername $serverPassword $serverIp $portSSH $portWG
 EOF
 # rm -r  $configsFolder/$serverIp/vpn
