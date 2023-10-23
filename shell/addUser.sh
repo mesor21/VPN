@@ -11,9 +11,8 @@ configsFolder=$(cat ./configsFolder)
 
 mkdir $configsFolder/$ip/keys
 
-wg genkey | tee "$configsFolder/$ip/client_privatekey" | wg pubkey | tee "$configsFolder/$ip/client_publickey"
-wg genpsk | tee "$configsFolder/$ip/client_preshared"
-
+wg genkey | tee "$configsFolder/$ip/keys/client_privatekey" | wg pubkey | tee "$configsFolder/$ip/keys/client_publickey"
+wg genpsk | tee "$configsFolder/$ip/keys/client_preshared"
 
 client_privatekey=$(cat "$configsFolder/$ip/keys/client_privatekey")
 client_publickey=$(cat "$configsFolder/$ip/keys/client_publickey")
