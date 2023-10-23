@@ -4,7 +4,7 @@ vpnIp=$3
 
 sudo wg-quick down wg0
 
-echo "[Peeer]
+sudo echo "[Peeer]
 PublicKey = $pubkey
 PresharedKey = $presharedKey
 AllowedIPs = $vpnIp

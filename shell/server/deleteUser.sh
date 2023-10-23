@@ -24,7 +24,7 @@ while IFS= read -r line; do
   fi
 done < "$config_file"
 
-mv "$temp_file" "$config_file"
+sudo mv "$temp_file" "$config_file"
 
 rm "$temp_file"
 

@@ -34,4 +34,4 @@ Endpoint = $server_ip:$portWG
 AllowedIPs = 0.0.0.0/0, ::/0
 " > "$configsFolder/$ip/userConfig/$id.conf"
 
-sshpass -p "$password" ssh $username@$ip -p $portSSH "bash ./createUser.sh $client_publickey $client_preshared $vpnIp"
+sshpass -p "$password" ssh $username@$ip -p $portSSH "sudo bash ./createUser.sh $client_publickey $client_preshared $vpnIp"
