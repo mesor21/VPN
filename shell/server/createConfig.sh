@@ -1,6 +1,7 @@
 serverIp=$1
 portWG=$2
 
+sudo touch /etc/wireguard/wg0.conf
 mkdir keys
 wg genkey | tee "$PWD/keys/server_privatekey" | wg pubkey | tee "$PWD/keys/server_publickey"
 server_privatekey=$(cat "$PWD/keys/server_privatekey")
@@ -9,7 +10,6 @@ rm -r keys
 
 server_interface=$(ip route | grep default | awk '{print $5}')
 
-sudo touch /etc/wireguard/wg0.conf
 sudo echo "[Interface]
 PrivateKey = $server_privatekey
 Address = $serverIp
