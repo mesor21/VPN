@@ -1,7 +1,7 @@
 serverIp=$1
 portSSH=$2
-portWG=$3
-serviceUsername=$4
-servicePassword=$5
-suCommand=$6
-suPassowrd=$7
+serviceUsername=$3
+servicePassword=$4
+publicKey=$5
+
+sshpass -p "$password" ssh $username@$ip -p $portSSH "bash ./deleteUser.sh $publicKey"

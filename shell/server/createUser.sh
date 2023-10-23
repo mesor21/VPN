@@ -1,11 +1,15 @@
 pubkey=$1
 presharedKey=$2
-ip=$3
+vpnIp=$3
 
-systemctl stop wg-quick@wg0.service
+sudo wg-quick down wg0
+
 echo "[Peeer]
 PublicKey = $pubkey
 PresharedKey = $presharedKey
-AllowedIPs = $ip
+AllowedIPs = $vpnIp
 " >> /etc/wireguard/wg0.conf
-systemctl start wg-quick@wg0.service
+
+sudo wg-quick up wg0
+
+sudo wg

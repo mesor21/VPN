@@ -22,7 +22,7 @@ rm -r $configsFolder/$ip/keys
 
 touch "$configsFolder/$ip/userConfig/$id.conf"
 echo "[Interface]
-Address = $ip
+Address = $vpnIp
 PrivateKey = $client_privatekey
 DNS = 1.1.1.1, 8.8.8.8, 8.8.4.4
 
@@ -34,4 +34,4 @@ Endpoint = $server_ip:$portWG
 AllowedIPs = 0.0.0.0/0, ::/0
 " > "$configsFolder/$ip/userConfig/$id.conf"
 
-sshpass -p "$password" ssh $username@$ip -p $portSSH "bash ./createUser.sh $client_publickey $client_preshared $ip"
+sshpass -p "$password" ssh $username@$ip -p $portSSH "bash ./createUser.sh $client_publickey $client_preshared $vpnIp"

@@ -25,4 +25,5 @@ sudo bash /vpn/shell/createConfig.sh $serverIp $portWG
 sudo wg-quick up wg0
 sleep 5
 sudo systemctl enable wg-quick@wg0
-echo "VPN service installation done"
+echo "### Application installed correctly"
+sudo wg
