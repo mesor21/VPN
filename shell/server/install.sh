@@ -24,5 +24,5 @@ sudo systemctl restart ssh.service
 sudo bash /vpn/shell/createConfig.sh $serverIp $portWG
 sudo wg-quick up wg0
 sleep 5
-sudo systemctl start wg-quick@wg0
 sudo systemctl enable wg-quick@wg0
+echo "VPN service installation done"

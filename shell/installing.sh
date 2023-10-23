@@ -1,4 +1,4 @@
-#testdata: 10.10.10.10 22 64000 user useruser sudo toor wguser wireguard
+#testdata: 10.10.10.10 22 64000 user useruser sudo adminadmin wguser wireguard
 
 configsFolder=$(cat ./configsFolder)
 shellFolder=$(pwd)
