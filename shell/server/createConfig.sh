@@ -6,12 +6,8 @@ mkdir keys
 wg genkey | tee "$PWD/keys/server_privatekey" | wg pubkey | tee "$PWD/keys/server_publickey"
 server_privatekey=$(cat "$PWD/keys/server_privatekey")
 server_publickey=$(cat "$PWD/keys/server_publickey")
-echo "!!! SERVER PUBLIC KEY !!!
-$server_publickey
-
-!!! SERVER PRIVATE KEY !!!
-$server_privatekey
-
+echo "SERVER_PUBLIC_KEY: $server_publickey
+SERVER_PRIVATE_KEY: $server_privatekey
 "
 rm -r keys
 

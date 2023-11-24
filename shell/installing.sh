@@ -3,7 +3,6 @@
 configsFolder=$(cat ./configsFolder)
 shellFolder=$(pwd)
 
-#преобразование в переменные 
 serverIp=$1
 portSSH=$2
 portWG=$3
