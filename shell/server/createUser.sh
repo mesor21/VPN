@@ -11,5 +11,3 @@ AllowedIPs = $vpnIp
 " >> /etc/wireguard/wg0.conf
 
 sudo wg-quick up wg0 >/dev/null 2>&1
-
-sudo wg

@@ -8,4 +8,4 @@ publicKey=$6
 configsFolder=$(cat ./configsFolder)
 
 sshpass -p "$password" ssh $username@$ip -p $portSSH "sudo bash ./deleteUser.sh $publicKey"
-rm configsFolder/$ip/$id.conf
+rm $onfigsFolder/$ip/$id.conf
